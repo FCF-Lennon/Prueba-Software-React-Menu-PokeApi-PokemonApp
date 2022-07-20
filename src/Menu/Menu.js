@@ -1,15 +1,17 @@
 import './Menu.css';
+import { Link, Outlet } from 'react-router-dom'
 
-function Menu () {
+const Menu = (props)  => {
     return (
         <div className='ctn-gui'>
             <aside className="ctn-aside">
                 <p>Menu</p>
                 <nav className='ctn-menu'>
                     <ul>
-                        <li><a href={'home'}>Historial Busqueda</a></li>
-                        <li><a href={'home'}>Lista Pokemones</a></li>
-                        <li><a href={'home'}>Combate</a></li>
+                        <li><Link to='/combate'>Combate</Link></li>
+                        <li><Link to='/historial'>Historial</Link></li>
+                        <li><Link to='/pokemon'>Pokemon</Link></li>
+                        <li><Link to='/pokedex'>Pokedex</Link></li>
                     </ul>
                 </nav>
             </aside> 
@@ -18,7 +20,7 @@ function Menu () {
                     <input type={'text'} placeholder={' Buscar'}></input>
                     <button>Go!</button>
                 </div>
-                <p>contenido central</p>
+                <Outlet />
             </main>       
         </div>
     )

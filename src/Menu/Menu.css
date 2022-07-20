@@ -47,6 +47,9 @@ nav>ul>li>a {
     text-decoration: none;
 }
 
+Link {
+    max-width: 100%;
+}
 
 /* MAIN */
 
@@ -73,6 +76,10 @@ main {
     max-width: 100%;
     height: 100%;
     border: thin solid rgb(77, 72, 72);
+}
+
+.ctn-buscador>input:focus {
+    outline: none;
 }
 
 .ctn-buscador>button {
