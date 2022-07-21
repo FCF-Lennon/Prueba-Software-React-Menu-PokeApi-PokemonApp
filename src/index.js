@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Menu from './Menu/Menu';
+import Root from './Root/Root';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Combate from './Combate/Combate';
@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Menu />}>
+        <Route path='/' element={<Root />}>
           <Route path='/combate' element={<Combate />}></Route>
           <Route path='/historial' element={<Historial/>}></Route>
           <Route path='/pokemon' element={<Pokemon />}></Route>
