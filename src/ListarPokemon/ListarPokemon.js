@@ -5,11 +5,11 @@ const ListaPokemones = (props) => {
     const [pokemons, setPokemons] = useState([])
 
     useEffect ( () => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 setPokemons(data.results)
+                console.log(data.results)
             })
     }, [])
 
@@ -17,7 +17,7 @@ const ListaPokemones = (props) => {
         <>
             {pokemons.map( (pokemon) => {
                 return (
-                    <p>{pokemon.name}</p>
+                    <li key={pokemon.name}>{pokemon.name}</li>
                 )
             })}
         </>
