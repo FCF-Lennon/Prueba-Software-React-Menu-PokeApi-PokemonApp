@@ -2,7 +2,6 @@ import {React, useEffect, useState} from "react"
 import Input from '../Elementos/Input/Input'
 import Button from '../Elementos/Button/Button'
 import './Pokemon.css'
-
 const Pokemon = (props) => {
 
     const [responseServer, setResponseServer] = useState([])
@@ -16,6 +15,7 @@ const Pokemon = (props) => {
     const [urlPokemonShinyBack, setUrlPokemonShinyBack] = useState('')
     const [urlPokemonFemaleFront, setUrlPokemonFemaleFront] = useState('')
     const [urlPokemonFemaleBack, setUrlPokemonFemaleBack] = useState('')
+    const [estadisticas, setEstadisticas] = useState([])
     
     useEffect ( () => {
         async function obtenerPokemon() {
@@ -34,6 +34,9 @@ const Pokemon = (props) => {
 
                 setUrlPokemonFemaleFront(data.sprites.front_female)
                 setUrlPokemonFemaleBack(data.sprites.back_female)
+
+                setEstadisticas(data.stats.map(s => (s.stat.name + ': ' + s.base_stat + '')))
+
 
             } else {
                 setResponseServer(response.status)
@@ -97,17 +100,17 @@ const Pokemon = (props) => {
     }
 
     return (
-        <>
-            <div className="ctn-search">
-                <Input type="text"  onChange={handleChange} name='Buscar Pokemon'/>
-                <Button onClick={handleClick} name='go!'/> 
-            </div>
-            
-            {responseServer === 200 && 
-            
-                <div className="ctn-card"> 
-                    {pokemonData.name &&
-                        <div> 
+            <>
+                <div className="ctn-search">
+                    <Input type="text"  onChange={handleChange} name='Buscar Pokemon'/>
+                    <Button onClick={handleClick} name='go!'/> 
+                </div>
+                
+                {responseServer === 200 && 
+                
+                    <div className="ctn-card"> 
+                        {pokemonData.name &&
+                            
                             <div className="ctn-main">
                                 <div className="ctn-img-radiobutton">
                                     <div className="ctn-img">
@@ -116,26 +119,28 @@ const Pokemon = (props) => {
                                     </div>
                                     <div className="ctn-radioButton">
                                         <p>{radioButton}</p>
-                                        <Input 
-                                            checked={radioButton === 'Version Normal' ? true : false} 
-                                            onChange={handleRadio}  
-                                            value='Version Normal' 
-                                            type='radio'
-                                            className='radioButtonPokemonNormal'
-                                            hidden={ocultarR1}/>
-                                        <Input 
-                                            checked={radioButton === 'Version Shiny' ? true : false} 
-                                            onChange={handleRadio}  
-                                            value='Version Shiny' 
-                                            type='radio' 
-                                            hidden={ocultarR2} />
-                                        <Input 
-                                            checked={radioButton === 'Version Female' ? true : false} 
-                                            onChange={handleRadio}  
-                                            value='Version Female' 
-                                            type='radio' 
-                                            className='radioButtonPokemonFemale'
-                                            hidden={ocultarR3}/>
+                                        <div className="inputs-radio">
+                                            <Input 
+                                                checked={radioButton === 'Version Normal' ? true : false} 
+                                                onChange={handleRadio}  
+                                                value='Version Normal' 
+                                                type='radio'
+                                                className='radioButtonPokemonNormal'
+                                                hidden={ocultarR1}/>
+                                            <Input 
+                                                checked={radioButton === 'Version Shiny' ? true : false} 
+                                                onChange={handleRadio}  
+                                                value='Version Shiny' 
+                                                type='radio' 
+                                                hidden={ocultarR2} />
+                                            <Input 
+                                                checked={radioButton === 'Version Female' ? true : false} 
+                                                onChange={handleRadio}  
+                                                value='Version Female' 
+                                                type='radio' 
+                                                className='radioButtonPokemonFemale'
+                                                hidden={ocultarR3}/>
+                                        </div>
                                     </div>
                                     <div className="ctn-data-1">
                                         <div className="ctn-name-id"> 
@@ -145,32 +150,41 @@ const Pokemon = (props) => {
                                         <p>Tipo: {pokemonData.types[0].type.name} </p>
                                     </div>
                                 </div>
-                                <div className="ctn-data-2-stat">
-                                    <div className="ctn-data-2">
+                                    
+                                <div className="ctn-data-2">
+                                    <div className="data-2"> 
                                         <p>Peso: {pokemonData.weight}</p>
                                         <p>Altura: {pokemonData.height}</p>
                                         <p>Exp: {pokemonData.base_experience}</p>
+                                    </div>
+                                    <div className="ctn-habilidades">
                                         <label>Habilidades:</label>
                                         <p>{pokemonData.abilities.map(e => ((e.ability.name + ' ' )))}</p>
                                     </div>
                                 </div>
+
+                                
+                                <div className="ctn-stat">
+                                    <label>Stat:</label>
+                                    <div className="ctn-estadisticas"> 
+                                        <p>{estadisticas[0]}</p>
+                                        <p>{estadisticas[1]}</p>
+                                        <p>{estadisticas[2]}</p>
+                                        <p>{estadisticas[3]}</p>
+                                        <p>{estadisticas[4]}</p>
+                                    </div> 
+                                </div>
                             </div>
-                            <div className="ctn-stat">
-                                <label>Stat:</label>
-                                <p>{pokemonData.stats.map(s => (s.stat.name + ': ' + s.base_stat + '\n'))}</p>
-                            </div>
-                        </div>
-                    } {!pokemonData.name && 
-                        <label>No olvide ingresar una busqueda.</label>
-                    }
-                </div>
-                
-            } {responseServer === 404 && <label>Pokemon no existe.</label>}
-        </>
+    
+                        } {!pokemonData.name && 
+                            <label className="mensaje-input-white">No olvide ingresar una busqueda.</label>
+                        }
+                    </div>
+                    
+                } {responseServer === 404 && <label className="mensaje-response-null">Pokemon no existe o el servidor esta offline.</label>}
+            
+            </> 
     )
 }
 
 export default Pokemon;
-
-
-
