@@ -4,24 +4,29 @@ const ListaPokemones = (props) => {
 
     const [pokemons, setPokemons] = useState([])
 
+    console.log(pokemons)
+
     useEffect ( () => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
-            .then(res => res.json())
-            .then((data) => {
-                setPokemons(data.results)
-                console.log(data.results)
-            })
+
+        async function obtenerPokemons() {
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=5offset=0')
+            const data = await response.json()
+            setPokemons(data.results)
+            
+        }
+        obtenerPokemons()
     }, [])
 
     return  (
+
         <>
-            {pokemons.map( (pokemon) => {
-                return (
-                    <li key={pokemon.name}>{pokemon.name}</li>
-                )
-            })}
+            <ul>
+                {pokemons.map((pokemon, index) => { 
+                    return <li key={index}>{pokemon.name}</li>
+                })}
+            </ul>
         </>
     )
 }
 
-export default ListaPokemones
+export default ListaPokemones;

@@ -1,129 +1,176 @@
-import React, { useEffect } from "react"
-import {useState} from "react"
-import Button from "../Elementos/Button/Button"
-
+import {React, useEffect, useState} from "react"
+import Input from '../Elementos/Input/Input'
+import Button from '../Elementos/Button/Button'
+import './Pokemon.css'
 
 const Pokemon = (props) => {
 
-    const [urlPokemon, setUrlPokemon] = useState('')
-    const [urlPokemonBack, setUrlPokemonBack] = useState('')
-    const [urlPokemonShiny, setUrlPokemonShiny] = useState('')
-    const [urlPokemonShinyBack, setUrlPokemonShinyBack] = useState('')
-    const [urlPokemonFamale, setUrlPokemonFamale] = useState('')
-    const [urlPokemonFamaleBack, setUrlPokemonFamaleBack] = useState('')
-
-    const [radio, setRadio] = useState('Normal')
-
-    const [pokemonName, setPokemonName] = useState('pikachu')
+    const [responseServer, setResponseServer] = useState([])
+    const [pokemonData, setPokemonData] = useState([])
+    const [pokemon, setPokemon] = useState('ditto')
     const [pokemonInput, setPokemonInput] = useState('')
+    const [radioButton, setRadioButton] = useState('Version Normal')
+    const [urlPokemonNormalFront, setUrlPokemonNormalFront] = useState('')
+    const [urlPokemonNormalBack, setUrlPokemonNormalBack] = useState('')
+    const [urlPokemonShinyFront, setUrlPokemonShinyFront] = useState('')
+    const [urlPokemonShinyBack, setUrlPokemonShinyBack] = useState('')
+    const [urlPokemonFemaleFront, setUrlPokemonFemaleFront] = useState('')
+    const [urlPokemonFemaleBack, setUrlPokemonFemaleBack] = useState('')
     
-    const [codigo, setCodigo] = useState('')
-    const [nombre, setNombre] = useState('')
-    const [tipo, setTipo] = useState('')
-    const [peso, setPeso] = useState('')
-    const [altura, setAltura] = useState('')
-    
-    const [habilidad, sethabilidad] = useState('')
-    const [movimientos, setMovimientos] = useState('')
-    const [experiencia, setExperiencia] = useState('')
+    useEffect ( () => {
+        async function obtenerPokemon() {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+            if (response.ok) {
+                const data = await response.json()
 
-    const [estadisticas, setEstadisticas] = useState('') 
-    
+                setPokemonData(data)
+                setResponseServer(response.status)
 
-    useEffect( () => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-            .then(res => res.json())
-            .then(
-                (data) => {
-                    
-                    setUrlPokemon(data.sprites.front_default)
-                    setUrlPokemonBack(data.sprites.back_default)
-                    setUrlPokemonShiny(data.sprites.front_shiny)
-                    setUrlPokemonShinyBack(data.sprites.back_shiny)
-                    setUrlPokemonFamale(data.sprites.front_female)
-                    setUrlPokemonFamaleBack(data.sprites.back_female)
+                setUrlPokemonNormalFront(data.sprites.front_default)
+                setUrlPokemonNormalBack(data.sprites.back_default)
 
-                    setCodigo(data.id)
-                    setNombre(data.name)
-                    setTipo(data.types.map(t => (t.type.name + (', '))))
-                    setPeso(data.weight)
-                    setAltura(data.height)
-                    sethabilidad(data.abilities.map(e => ((e.ability.name + ', ' ))))
-                    setMovimientos(data.moves.map(m => (m.move.name + ', ')))
-                    setEstadisticas(data.stats.map(s => (s.stat.name + ' ' + s.base_stat + ', '))) 
-                    
+                setUrlPokemonShinyFront(data.sprites.front_shiny)
+                setUrlPokemonShinyBack(data.sprites.back_shiny)
 
-                    setExperiencia(data.base_experience)
+                setUrlPokemonFemaleFront(data.sprites.front_female)
+                setUrlPokemonFemaleBack(data.sprites.back_female)
 
+            } else {
+                setResponseServer(response.status)
+            }
+        }    
+        obtenerPokemon()
+    }, [pokemon])
 
-                    console.log(data.stats)
-                    console.log(data)
-                    
-                }
-            )
-    }, [pokemonName] )
-
-    const handleChange = (event) => {
-        setPokemonInput(event.target.value)
-    }
-
-    const handleChangeRadius = (event) => {
-        setRadio(event.target.value)
+    const handleChange = (e) => {
+        setPokemonInput(e.target.value)
     }
 
     const handleClick = () => {
-
-        setPokemonName(pokemonInput)
-
+        setPokemon(pokemonInput)
     }
+
+    const handleRadio = (e) => {
+        setRadioButton(e.target.value)
+    }
+
+    let 
+    url1, 
+    url2, 
+    descript, 
+    ocultarR1,
+    ocultarR2,
+    ocultarR3
     
-    let url1, url2, descript
-
-    if (radio === 'Famale') {
-        url1 = urlPokemonFamale
-        url2 = urlPokemonFamaleBack
-        descript = 'pokemon famale'
-    }
-    else if (radio === 'Shiny') {
-        url1 = urlPokemonShiny
-        url2 = urlPokemonShinyBack
-        descript = 'pokemon shiny'
-
+    if (urlPokemonNormalBack === null || urlPokemonNormalFront === null) {
+        ocultarR1 = true
     } else {
-        url1 = urlPokemon
-        url2 = urlPokemonBack
-        descript = 'pokemon normal'
+        ocultarR1 = false
+        if (radioButton === 'Version Normal') {
+            url1 = urlPokemonNormalFront
+            url2 = urlPokemonNormalBack
+            descript = 'pokemon normal'
+        }
+    } 
+    
+    if (urlPokemonShinyFront === null || urlPokemonShinyBack === null) {
+        ocultarR2=true
+    } else {
+        ocultarR2=false
+
+        if (radioButton === 'Version Shiny') {
+            url1 = urlPokemonShinyFront
+            url2 = urlPokemonShinyBack
+            descript = 'pokemon shiny'
+        } 
+    }
+
+    if (urlPokemonFemaleFront === null || urlPokemonFemaleBack === null) {
+        ocultarR3=true
+    } else {
+        ocultarR3=false
+        if (radioButton === 'Version Female') {
+            url1 = urlPokemonFemaleFront
+            url2 = urlPokemonFemaleBack
+            descript = 'pokemon female'
+        }  
     }
 
     return (
         <>
-            <input type="text" onChange={(e) => handleChange(e)}/>
-            <Button enviar={handleClick} name='go!'/>
-            <br />
-            <img src={url1} alt={descript}/>
-            <img src={url2} alt={descript}/>
-            <input type="radio" value='Normal'onChange={handleChangeRadius} checked={radio ===  'Normal' ? true : false} id ='pNormal'/>
-            <label>Normal</label>
-            <input type="radio" value='Shiny' onChange={handleChangeRadius} checked={radio === 'Shiny' ? true : false} id='pShiny'/>
-            <label>Shany</label>
-            <input type="radio" value='Famale'onChange={handleChangeRadius} checked={radio ===  'Famale' ? true : false} id ='pFamale'/>
-            <label>Famale</label>
+            <div className="ctn-search">
+                <Input type="text"  onChange={handleChange} name='Buscar Pokemon'/>
+                <Button onClick={handleClick} name='go!'/> 
+            </div>
             
-            <div>
-                <div>
-                    <p>#: {codigo}</p>
-                    <p>nombre: {nombre}</p>
-                    <p>tipo: {tipo}</p>
-                    <p>Peso: {peso}</p>
-                    <p>Altura: {altura}</p>
-                    <p>Habilidad/es: {habilidad}</p>
-                    <p>Movimiento/os: {movimientos}</p>
-                    <p>Exp Base: {experiencia}</p>
-                    <p>stat: {estadisticas}</p> 
+            {responseServer === 200 && 
+            
+                <div className="ctn-card"> 
+                    {pokemonData.name &&
+                        <div> 
+                            <div className="ctn-main">
+                                <div className="ctn-img-radiobutton">
+                                    <div className="ctn-img">
+                                        <img src={url1} alt={descript}></img>
+                                        <img src={url2} alt={descript}></img>
+                                    </div>
+                                    <div className="ctn-radioButton">
+                                        <p>{radioButton}</p>
+                                        <Input 
+                                            checked={radioButton === 'Version Normal' ? true : false} 
+                                            onChange={handleRadio}  
+                                            value='Version Normal' 
+                                            type='radio'
+                                            className='radioButtonPokemonNormal'
+                                            hidden={ocultarR1}/>
+                                        <Input 
+                                            checked={radioButton === 'Version Shiny' ? true : false} 
+                                            onChange={handleRadio}  
+                                            value='Version Shiny' 
+                                            type='radio' 
+                                            hidden={ocultarR2} />
+                                        <Input 
+                                            checked={radioButton === 'Version Female' ? true : false} 
+                                            onChange={handleRadio}  
+                                            value='Version Female' 
+                                            type='radio' 
+                                            className='radioButtonPokemonFemale'
+                                            hidden={ocultarR3}/>
+                                    </div>
+                                    <div className="ctn-data-1">
+                                        <div className="ctn-name-id"> 
+                                            <h1>{pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}</h1>
+                                            <p>#{pokemonData.id}</p>
+                                        </div>
+                                        <p>Tipo: {pokemonData.types[0].type.name} </p>
+                                    </div>
+                                </div>
+                                <div className="ctn-data-2-stat">
+                                    <div className="ctn-data-2">
+                                        <p>Peso: {pokemonData.weight}</p>
+                                        <p>Altura: {pokemonData.height}</p>
+                                        <p>Exp: {pokemonData.base_experience}</p>
+                                        <label>Habilidades:</label>
+                                        <p>{pokemonData.abilities.map(e => ((e.ability.name + ' ' )))}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="ctn-stat">
+                                <label>Stat:</label>
+                                <p>{pokemonData.stats.map(s => (s.stat.name + ': ' + s.base_stat + '\n'))}</p>
+                            </div>
+                        </div>
+                    } {!pokemonData.name && 
+                        <label>No olvide ingresar una busqueda.</label>
+                    }
                 </div>
-            </div> 
+                
+            } {responseServer === 404 && <label>Pokemon no existe.</label>}
         </>
     )
 }
 
-export default Pokemon
+export default Pokemon;
+
+
+

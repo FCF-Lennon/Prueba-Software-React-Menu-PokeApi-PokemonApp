@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import './root.css';
+import '../Root/Root.css';
+
 
 
 const Root = (props)  => {
@@ -9,10 +10,12 @@ const Root = (props)  => {
     return (
         <div className='ctn-gui'>
             <aside className="ctn-aside">
-                <Link to='/combate'>Combate</Link>
-                <Link to='/historial'>Historial</Link>
-                <Link to='/pokemon'>Pokemon</Link>
-                <Link to='/pokedex'>Pokedex</Link>
+                <div>
+                    <Link to='/combate'>Combate</Link>
+                    <Link to='/historial'>Historial</Link>
+                    <Link to='/pokemon'>Pokemon</Link>
+                    <Link to='/pokedex'>Pokedex</Link>
+                </div>
             </aside> 
             <main> 
                 <Outlet />

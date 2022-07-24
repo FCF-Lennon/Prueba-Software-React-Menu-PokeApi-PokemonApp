@@ -3,7 +3,7 @@ import React from "react";
 
 const Button = (props) => {
     return (
-        <button onClick={props.enviar}>{props.name}</button>
+        <button onClick={props.onClick}>{props.name}</button>
     )
 
 };

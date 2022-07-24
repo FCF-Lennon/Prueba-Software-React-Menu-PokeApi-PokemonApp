@@ -17,7 +17,7 @@ root.render(
         <Route path='/' element={<Root />}>
           <Route path='/combate' element={<Combate />}></Route>
           <Route path='/historial' element={<Historial/>}></Route>
-          <Route path='/pokemon' element={<Pokemon />}></Route>
+          <Route path='/pokemon' element={<Pokemon onclick='/pokemon'/>}></Route>
           <Route path='/pokedex' element={<ListaPokemones />}></Route>
         </Route>
       </Routes>
