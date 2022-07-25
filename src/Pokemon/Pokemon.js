@@ -2,6 +2,9 @@ import {React, useEffect, useState} from "react"
 import Input from '../Elementos/Input/Input'
 import Button from '../Elementos/Button/Button'
 import './Pokemon.css'
+
+
+
 const Pokemon = (props) => {
 
     const [responseServer, setResponseServer] = useState([])

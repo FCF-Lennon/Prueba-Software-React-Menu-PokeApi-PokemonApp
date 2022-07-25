@@ -9,6 +9,7 @@ import ListaPokemones from './ListarPokemon/ListarPokemon';
 import Pokemon from './Pokemon/Pokemon';
 import Historial from './Historial/Historial';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -17,7 +18,7 @@ root.render(
         <Route path='/' element={<Root />}>
           <Route path='/combate' element={<Combate />}></Route>
           <Route path='/historial' element={<Historial/>}></Route>
-          <Route path='/pokemon' element={<Pokemon onclick='/pokemon'/>}></Route>
+          <Route path='/pokemon' element={<Pokemon />}></Route>
           <Route path='/pokedex' element={<ListaPokemones />}></Route>
         </Route>
       </Routes>
