@@ -11,7 +11,6 @@ function Buscador(props) {
             event.preventDefault()
             setBusqueda(event.target.value)
             if (busqueda === '') {
-                console.log(busqueda)
                 return alert('Pokemon no existe o campo vacio.')
             }
         }
@@ -21,7 +20,6 @@ function Buscador(props) {
         event.preventDefault()
         setBusqueda(event.target.value)
         if (busqueda === '') {
-            console.log(busqueda)
             return alert('Pokemon no existe o campo vacio.')
         }
         props.getPokemonOne(busqueda.toLowerCase())

@@ -1,9 +1,7 @@
 
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import '../Root/Root.css';
-
-
+import '../Root/root.css';
 
 const Root = (props)  => {
 
