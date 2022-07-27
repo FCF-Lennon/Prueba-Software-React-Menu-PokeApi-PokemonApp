@@ -1,9 +1,7 @@
-import {React, useEffect, useState} from "react"
-import Input from '../Elementos/Input/Input'
-import Button from '../Elementos/Button/Button'
+import {React, useState, useEffect} from "react"
 import './Pokemon.css'
-
-
+import Input from "../Elementos/Input/Input"
+import Button from "../Elementos/Button/Button"
 
 const Pokemon = (props) => {
 

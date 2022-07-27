@@ -43,8 +43,6 @@ function Tarjetas({ cod,
                     <p>{exp_base}</p>
                     </div>
                 </div>
-                
-
             </div>
         </div>
     </div>

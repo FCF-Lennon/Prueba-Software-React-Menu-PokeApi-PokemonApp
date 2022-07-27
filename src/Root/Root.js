@@ -11,10 +11,9 @@ const Root = (props)  => {
         <div className='ctn-gui'>
             <aside className="ctn-aside">
                 <div>
-                    <Link to='/combate'>Combate</Link>
-                    <Link to='/historial'>Historial</Link>
-                    <Link to='/pokemon'>Pokemon</Link>
-                    <Link to='/pokedex'>Pokedex</Link>
+                    <Link to='/combate'>COMBATE</Link>
+                    <Link to='/pokemon'>POKEMON</Link>
+                    <Link to='/pokedex'>POKEDEX</Link>
                 </div>
             </aside> 
             <main> 

@@ -36,12 +36,11 @@
     justify-content: center;
     width: 30%;
     height: 100%;
-    border: none;
     font-size: 1.5rem;
     color: #424949;
     outline: none;
     border-radius: 0px 66px 66px 0px;
-    border: 1px solid #dfe1e5;
+    border: 2px solid #dfe1e5;
     border-left: none;
     background-color: #dfe1e5;
     color: #424949;

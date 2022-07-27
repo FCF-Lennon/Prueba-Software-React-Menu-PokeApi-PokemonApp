@@ -25,6 +25,7 @@ function ListarPokemon() {
 
     }
 
+
     useEffect(() => {
         getupdatePokemones()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,19 +35,16 @@ function ListarPokemon() {
     return (
         
         <div className='flex flex-wrap justify-center'>
+            
             {updatePokemones.map((pokemon, idx) => ( 
-                <div className='espacio-tarjetas'>
-                    <Tarjetas
-                        key={idx}
+                    <Tarjetas key={idx}  pokemon={pokemon} 
                         cod={pokemon.id}
                         nombre={pokemon.name}
                         imagenfrontal={pokemon.sprites.front_default}
                         tipo={pokemon.types[0].type.name}
                         peso={pokemon.weight}
                         altura={pokemon.height}
-                        exp_base={pokemon.base_experience}
-                    />
-                </div>
+                        exp_base={pokemon.base_experience}/>
             ))}
         </div>
         
@@ -55,90 +53,3 @@ function ListarPokemon() {
 }
 
 export default ListarPokemon
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* const ListarPokemon = () => {
-
-    const [lista, setLista] = useState([]);
-    
-    useEffect(() => {
-
-        async function fecthPokemons(number) {
-            for (let i = 1; i <= number; i++) {
-                const pokeresult = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-                const data = await pokeresult.json();
-                setLista(lista => [...lista, data]);
-                console.log(lista);
-            }
-        }
-        fecthPokemons(5);
-
-
-    } , []);
-
-    
-    return (
-        <>
-            <h1>Listar Pokemon</h1>
-            <ul>
-                {lista.map(pokemon => (
-                    <li key={pokemon.index}>
-                        <h2>{pokemon.name}</h2>
-                        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-                    </li>
-                ))}
-            </ul>
-        </>   
-        
-    )
-
-}
-
-export default ListarPokemon; */
-
-
-

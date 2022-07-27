@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Combate from './Combate/Combate';
 import ListaPokemones from './ListarPokemon/ListarPokemon';
 import Pokemon from './Pokemon/Pokemon';
-import Historial from './Historial/Historial';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,8 +17,10 @@ root.render(
       <Routes>
         <Route path='/' element={<Root />}>
           <Route path='/combate' element={<Combate />}></Route>
-          <Route path='/historial' element={<Historial/>}></Route>
-          <Route path='/pokemon' element={<Pokemon />}></Route>
+          <Route path='/pokemon' element={<Pokemon />}>
+            <Route path=':pokename' element={<Pokemon />}></Route>
+          </Route>
+
           <Route path='/pokedex' element={<ListaPokemones />}></Route>
         </Route>
       </Routes>
