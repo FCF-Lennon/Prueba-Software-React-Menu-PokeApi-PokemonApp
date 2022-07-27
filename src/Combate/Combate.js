@@ -58,108 +58,119 @@ function Combate () {
 
 
     return (
-        <div className='ctn-combate'>
-            <div className='ctn-seleccionar-peleador'>
+        <>
+            <div className='ctn-combate'>
+                <div className='ctn-seleccionar-peleador'>
+                    
+                    <div>
+                        <h1>Player One</h1>
+                    </div>
+                    <div>
+                        <Buscador getPokemonOne={getPokemonOne} />
+                    </div>
+                    
+                    {!loadingOne && pokemonOne ? (
+                        <div className='ctn-stat-peleador'>
+                            <h1 className='capitalizate-pokename'>{pokemonOne.name.charAt(0).toUpperCase() + pokemonOne.name.slice(1)}</h1>
+                            {hpPokemonOne > 1 ? (<div>
+                                <img src={pokemonOne?.sprites.front_default} alt={pokemonOne.name} />
+                            </div>) : (<div>
+                                <img src={pokemonOne?.sprites.front_default} alt={pokemonOne.name} />
+                            </div>)}
+                            <div>Vida {hpPokemonOne >= 25 ?
+                                (<h1 >{hpPokemonOne}</h1>) : hpPokemonOne <= 24 && hpPokemonOne > 0 ?
+                                    (<h1>{hpPokemonOne}</h1>) :
+                                    hpPokemonOne <= 0 && (
+                                        <>
+                                            <div>
+                                                <h1>0</h1>
+                                            </div>
+                                            <div className='ctn-win'>
+                                                <p>Player Two Win</p>
+                                            </div>
+                                        </>
+                                    )}
+                            </div>
+
+                            <div className='ctn-button'>
+                                <Button 
+                                    onClick={() => attackPokemonOne('attack')} 
+                                    disabled={disableAttackOne || hpPokemonOne <= 0} 
+                                    type="button" 
+                                    name= 'PUNCH'
+                                    className='button-punch'
+                                    /> 
+                            </div> 
+                            <div>
+                                <Button 
+                                    onClick={() => attackPokemonOne('special-attack')} 
+                                    disabled={disableAttackOne || hpPokemonOne <= 0} 
+                                    type="button" 
+                                    name= 'S'
+                                    className='button-especial'
+                                    />
+                            </div> 
+
+                        </div>) : null}
+                </div>
                 
-                <div>
-                    <h1>Player One</h1>
+
+                <div className='ctn-seleccionar-peleador'>
+                    <div> 
+                        <h1>Player Two</h1>
+                    </div>
+                    <div>
+                        <BuscadorCombate getPokemonTwo={getPokemonTwo} />
+                    </div>
+                    {!loadingTwo && pokemonTwo ? (
+                        <div className='ctn-stat-peleador'>
+                            <h1 className='capitalizate-pokename'>{pokemonTwo.name.charAt(0).toUpperCase() + pokemonTwo.name.slice(1)}</h1>
+                            {hppokemonTwo > 1 ? (<div>
+                                <img 
+                                    src={pokemonTwo?.sprites.front_default} 
+                                    alt={pokemonTwo.name} />
+                            </div>) : (<div>
+                                <img 
+                                    src={pokemonTwo?.sprites.front_default} 
+                                    alt={pokemonTwo.name} />
+                            </div>)}
+                            <div>Vida {hppokemonTwo >= 25 ?
+                                (<h1>{hppokemonTwo}</h1>) : hppokemonTwo <= 24 && hppokemonTwo > 0 ?
+                                    (<h1>{hppokemonTwo}</h1>) :
+                                    hppokemonTwo <= 0 && (
+                                        <>
+                                            <div>
+                                                <h1>0</h1>
+                                            </div>
+                                            <div className='ctn-win'>
+                                                <p>Player One Win</p>
+                                            </div>
+                                        </>
+                                    )}
+                            </div>
+
+                            <div className='ctn-button'>
+                                <Button 
+                                    onClick={() => attackPokemonTwo('attack')} 
+                                    disabled={disableAttackTwo || hppokemonTwo <= 0} 
+                                    type="button" 
+                                    name= 'PUNCH'
+                                    className='button-punch'
+                                    />
+                                    
+                            </div>
+                            <div>
+                                <Button
+                                    onClick={() => attackPokemonTwo('special-attack')} 
+                                    disabled={disableAttackTwo || hppokemonTwo <= 0} 
+                                    type="button"
+                                    name='S'
+                                    className='button-especial'/>
+                            </div>
+                        </div>) : null}
                 </div>
-                <div>
-                    <Buscador getPokemon={getPokemonOne} />
-                </div>
-                
-                {!loadingOne && pokemonOne ? (
-                    <div className='ctn-stat-peleador'>
-                        <h1 className='capitalizate-pokename'>{pokemonOne.name.charAt(0).toUpperCase() + pokemonOne.name.slice(1)}</h1>
-                        {hpPokemonOne > 1 ? (<div>
-                            <img src={pokemonOne?.sprites.front_default} alt={pokemonOne.name} />
-                        </div>) : (<div>
-                            <img src={pokemonOne?.sprites.front_default} alt={pokemonOne.name} />
-                        </div>)}
-                        <div>Vida {hpPokemonOne >= 25 ?
-                            (<h1 >{hpPokemonOne}</h1>) : hpPokemonOne <= 24 && hpPokemonOne > 0 ?
-                                (<h1>{hpPokemonOne}</h1>) :
-                                hpPokemonOne <= 0 && (<h1>0</h1>)}
-                        </div>
-
-                        <div className='ctn-button'>
-                            <Button 
-                                onClick={() => attackPokemonOne('attack')} 
-                                disabled={disableAttackOne || hpPokemonOne <= 0} 
-                                type="button" 
-                                name= 'PUNCH'
-                                className='button-punch'
-                                /> 
-                        </div> 
-                        <div>
-                            <Button 
-                                onClick={() => attackPokemonOne('special-attack')} 
-                                disabled={disableAttackOne || hpPokemonOne <= 0} 
-                                type="button" 
-                                name= 'S'
-                                className='button-especial'
-                                />
-                        </div> 
-
-                    </div>) : null}
-
-            </div>
-
-            <div className='ctn-seleccionar-peleador'>
-                <div> 
-                    <h1>Player Two</h1>
-                </div>
-                <div>
-                    <BuscadorCombate getpokemonDos={getPokemonTwo} />
-                </div>
-                {!loadingTwo && pokemonTwo ? (
-                    <div className='ctn-stat-peleador'>
-                        <h1 className='capitalizate-pokename'>{pokemonTwo.name.charAt(0).toUpperCase() + pokemonTwo.name.slice(1)}</h1>
-                        {hppokemonTwo > 1 ? (<div>
-                            <img 
-                                src={pokemonTwo?.sprites.front_default} 
-                                alt={pokemonTwo.name} />
-                        </div>) : (<div>
-                            <img 
-                                src={pokemonTwo?.sprites.front_default} 
-                                alt={pokemonTwo.name} />
-                        </div>)}
-                        <div>Vida {hppokemonTwo >= 25 ?
-                            (<h1>{hppokemonTwo}</h1>) : hppokemonTwo <= 24 && hppokemonTwo > 0 ?
-                                (<h1>{hppokemonTwo}</h1>) :
-                                hppokemonTwo <= 0 && (
-                                <h1>0</h1>
-                                )}
-                        </div>
-
-                        <div className='ctn-button'>
-                            <Button 
-                                onClick={() => attackPokemonTwo('attack')} 
-                                disabled={disableAttackTwo || hppokemonTwo <= 0} 
-                                type="button" 
-                                name= 'PUNCH'
-                                className='button-punch'
-                                />
-                                
-                        </div>
-                        <div>
-                            <Button
-                                onClick={() => attackPokemonTwo('special-attack')} 
-                                disabled={disableAttackTwo || hppokemonTwo <= 0} 
-                                type="button"
-                                name='S'
-                                className='button-especial'/>
-                        </div>
-
-                        
-
-                    </div>) : null}
-            </div>
-        
-
-    
-
-        </div >
+            </div >
+        </>
     )
 }
 

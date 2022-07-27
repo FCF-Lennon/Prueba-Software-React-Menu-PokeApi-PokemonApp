@@ -8,10 +8,11 @@ function BuscadorCombate(props) {
 
     const handleKeyDown = async (event) => {
         if (event.key === 'Enter') {
+            console.log(event.key)
             event.preventDefault()
             setBusqueda(event.target.value)
             if (busqueda === '') {
-                console.log(busqueda)
+                return alert('Pokemon no existe o campo vacio.')
             }
         }
     }
@@ -22,7 +23,7 @@ function BuscadorCombate(props) {
         if (busqueda === '') {
             return alert('Pokemon no existe o campo vacio.')
         }
-        props.getPokemonDos(busqueda.toLowerCase())
+        props.getPokemonTwo(busqueda.toLowerCase())
     }
 
     return (
