@@ -7,5 +7,5 @@ describe ('Pruebas unitarias modulo index', () => {
         expect(tree).toBeTruthy();
     }
     );
-}
-);
+}); // prueba fail createRoot(...) porque el contenedor de destino no es 
+// un elemento DOM

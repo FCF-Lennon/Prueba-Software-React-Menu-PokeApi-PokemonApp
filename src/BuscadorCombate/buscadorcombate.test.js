@@ -3,8 +3,8 @@ import BuscadorCombate from './BuscadorCombate';
 
 describe ('Pruebas unitarias al componente buscadorCombate', () => {
 
-    it('Should render ', () => {
+    it('Comprueba que el elemento BuscadorCombate se este renderizando correctamente', () => {
         const tree = renderer.create(<BuscadorCombate />);
         expect(tree).toBeTruthy();
     })
-})
+}); // la prueba es correcta
